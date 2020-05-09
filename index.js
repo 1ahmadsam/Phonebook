@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 
 app.use(cors());
+app.use(express.static('build'));
 app.use(express.json());
 morgan.token('type', (req, res) => {
   if (req.method === 'POST') {
@@ -37,9 +38,9 @@ let persons = [
   },
 ];
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello World!</h1>');
-});
+// app.get('/', (req, res) => {
+//   res.send('<h1>Hello World!</h1>');
+// });
 
 // App Info
 app.get('/info', (req, res) => {
