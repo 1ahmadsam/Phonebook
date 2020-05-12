@@ -9,7 +9,7 @@ app.use(express.static('build'));
 app.use(cors());
 app.use(express.json());
 
-morgan.token('type', (req, res) => {
+morgan.token('type', (req) => {
   if (req.method === 'POST') {
     return JSON.stringify(req.body);
   }
@@ -21,7 +21,7 @@ app.use(
 // App Info
 app.get('/info', (req, res) => {
   res.send(
-    `<p> Phonebook has enough info for ${persons.length} people </p><p>${Date(
+    `<p> Phonebook has enough info for ${Person.length} people </p><p>${Date(
       Date.now()
     ).toString()}</p>`
   );
@@ -52,6 +52,7 @@ app.delete('/api/persons/:id', (req, res, next) => {
   Person.findByIdAndRemove(req.params.id)
     .then((result) => {
       res.status(204).end();
+      console.log(result);
     })
     .catch((err) => next(err));
 });
